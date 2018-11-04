@@ -1,0 +1,69 @@
+
+
+<div class="row">
+    <div class="col">
+      <b>Task:</b> <input [(ngModel)]="taskSearchText" size="80">
+    </div>
+    <div class="col">
+          <b>ParentTask:</b> <input [(ngModel)]="parentTaskSearchText" size="80">
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col">
+        <b>Priority From:</b> <input [(ngModel)]="priorityTaskSearchTextFrom">
+    </div>
+    <div class="col">
+      <b>Priority To:</b> <input [(ngModel)]="priorityTaskSearchTextTo">
+    </div>
+    <div class="col">
+      <b>Start Date:</b> <input [(ngModel)]="taskStartDate">
+    </div>
+    <div class="col">
+      <b>End Date:</b> <input [(ngModel)]="taskEndDate">
+    </div>
+</div>
+
+<br>
+<hr>
+      <div class="row" *ngFor="let taskItem of taskList | filter : taskSearchText | filterParentTask : parentTaskSearchText |  filterTaskByPriorityFrom :priorityTaskSearchTextFrom |  filterTaskByPriorityTo :priorityTaskSearchTextTo  | filterTaskByStartDate : taskStartDate | filterTaskByEndDate : taskEndDate ">
+        <div class="col">
+          <b>Task</b> <br>
+          <div class="card">
+            <div class="card-header" >
+              <h5 class="card-title">{{taskItem.task}}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <b>Parent</b> <br>
+          <div class="card">
+            <div class="card-header" >
+              <h5 class="card-title">{{taskItem.parentTask}}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col col-lg-1">
+          <b>Priority</b> <br>{{taskItem.priority}}
+        </div>
+
+        <div class="col col-lg-1">
+          <b>Start</b> <br>
+          {{taskItem.startDate |  date:'MM/dd/yyyy'}}
+        </div>
+
+        <div class="col col-lg-1">
+          <b>End</b> <br>
+          {{taskItem.endDate |  date:'MM/dd/yyyy'}}
+        </div>
+
+        <div class="col col-lg-1">
+          <br><button class="btn" type="button" id="button-edit" (click)="edit(taskItem)">Edit</button>
+        </div>
+        
+        <div class="col col-lg-1">
+          <br><button class="btn" type="button" id="button-end" (click)="remove(taskItem.taskId)">End Task</button>
+        </div>
+      </div>

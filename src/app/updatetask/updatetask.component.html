@@ -1,0 +1,65 @@
+<form [formGroup]="updateTaskForm" (ngSubmit)="onSubmit()" >
+
+<div id="updateSection">
+    <div class="row justify-content-start">
+      <div class="col col-auto"></div>
+      <div class="col col-2">
+        Task:
+      </div>
+      <div class="col col-5"><input type="text" class="form-control" id="taskName" formControlName="taskName">
+      </div>
+    </div>
+    <br>
+    <div class="row justify-content-start">
+      <div class="col col-auto"></div>
+      <div class="col col-2">
+        <label for="formControlRange">Priority:</label>
+      </div>
+      <div class="col col-5">
+        <span class="input-group-text" id="basic-addon1">0<input type="range"  max="30" min="0" class="form-control-range" id="priority" step="1"  formControlName="priority">30</span>
+      </div>
+    </div>
+    <br>
+    <div class="row justify-content-start">
+      <div class="col col-auto"></div>
+      <div class="col col-2">
+        Parent Task:
+      </div>
+      <div class="col col-5">
+        <input type="text" class="form-control" id="parentTaskName"  formControlName="parentTaskName">
+        </div>
+    </div>
+    <br>
+    <div class="row justify-content-start">
+        <div class="col col-auto"></div>
+        <div class="col col-2">
+          Start Date:
+        </div>
+        <div class="col col-5">
+          <input type="date" class="form-control" id="startDate"  formControlName="startDate">
+          </div>
+      </div>
+      <br>
+      <div class="row justify-content-start">
+          <div class="col col-auto"></div>
+          <div class="col col-2">
+            End Date:
+          </div>
+          <div class="col col-5">
+            <input type="date" class="form-control" id="endDate"  formControlName="endDate">
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row justify-content-start">
+            <div class="col col-auto"></div>
+            <div class="col col-2"></div>
+            <div class="col col-auto">
+              <button class="btn btn-outline-secondary" type="button" id="button-addTask" (click)="onSubmit()">Update</button>
+            </div>
+            <div class="col col-auto">            
+              <button class="btn btn-outline-secondary" type="button" id="button-reset" (click)="cancel()">Cancel</button>
+            </div>
+          </div>
+  </div>
+  </form>
