@@ -16,6 +16,8 @@ import { TaskManagerService } from './services/taskmanager.service';
 import { FilterPriorityTaskPipeTo } from './filterTaskByPriorityTo.pipe';
 import { FilterTaskByStartDate } from './filterTaskByStartDate.pipe';
 import { FilterTaskByEndDate } from './filterTaskByEndDate.pipe';
+import { AddProjectComponent } from './add-project/add-project.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { FilterTaskByEndDate } from './filterTaskByEndDate.pipe';
     FilterPriorityTaskPipe,
     FilterPriorityTaskPipeTo,
     FilterTaskByStartDate,
-    FilterTaskByEndDate
+    FilterTaskByEndDate,
+    AddProjectComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserModule,

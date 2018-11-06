@@ -2,58 +2,82 @@
   
 <div id="addSection">
   <div class="row justify-content-start">
+  <div class="col col-auto"></div>
+  <div class="col col-1">
+    <b>Project:</b>
+  </div>
+  <div class="col col-auto"><input type="text" size="64" class="form-control" formControlName="projectName" />
+    
+  </div>
+  <div class="col col-2">
+  <button class="btn" type="button-rounded" id="button-searchProject" (click)="search()">Search</button>
+  </div>
+  
+</div>
+<br>
+  <div class="row justify-content-start">
     <div class="col col-auto"></div>
-    <div class="col col-2">
-      Task:
+    <div class="col col-1">
+      <b>Task:</b>
     </div>
-    <div class="col col-5"><input type="text" class="form-control" formControlName="taskName" >
+    <div class="col col-auto"><input type="text" size="78" class="form-control" formControlName="taskName" />
     </div>
   </div>
   <br>
   <div class="row justify-content-start">
     <div class="col col-auto"></div>
-    <div class="col col-2">
-      <label for="formControlRange">Priority:</label>
+    <div class="col col-1">
+      <b><label for="formControlRange">Priority:</label></b>
     </div>
     <div class="col col-5">
-      <span class="input-group-text" id="basic-addon1">0<input type="range" max="30" min="0" class="form-control-range" id="formControlRange" step="1" formControlName="priority" >30</span>
+      <span class="input-group-text" id="basic-addon1">0<input  size="75" type="range" max="30" min="0" class="form-control-range" id="formControlRange" step="1" formControlName="priority" >30</span>
     </div>
   </div>
   <br>
   <div class="row justify-content-start">
     <div class="col col-auto"></div>
-    <div class="col col-2">
-      Parent Task:
+    <div class="col col-1">
+      <b>Parent Task:</b>
     </div>
-    <div class="col col-5">
-      <input type="text" class="form-control" formControlName="parentTaskName" >
+    <div class="col col-auto">
+      <input type="text"  size="64" class="form-control" formControlName="parentTaskName" >
+      </div>
+      <div class="col col-2">
+        <button class="btn" type="button-rounded" id="button-searchParentTask" (click)="searchParentTask()">Search</button>
       </div>
   </div>
   <br>
   <div class="row justify-content-start">
       <div class="col col-auto"></div>
-      <div class="col col-2">
-        Start Date:
+      <div class="col col-1">
+        <b>Start Date:</b>
       </div>
-      <div class="col col-5">
+      <div class="col col-2">
         <input type="date" class="form-control" formControlName="startDate" >
+        </div> <div class="col col-1">
+          <b>End Date:</b>
         </div>
+        <div class="col col-2">
+          <input type="date" class="form-control" formControlName="endDate" >
+          </div>
     </div>
     <br>
     <div class="row justify-content-start">
-        <div class="col col-auto"></div>
-        <div class="col col-2">
-          End Date:
-        </div>
-        <div class="col col-5">
-          <input type="date" class="form-control" formControlName="endDate" >
-          </div>
+      <div class="col col-auto"></div>
+      <div class="col col-1">
+        <b>User:</b>
       </div>
-      <br>
+      <div class="col col-auto">
+        <input type="text"  size="64" class="form-control" formControlName="userName" >
+        </div>
+        <div class="col col-2">
+          <button class="btn" type="button-rounded" id="button-searchUser" (click)="searchUser()">Search</button>
+        </div>
+    </div>
       <br>
       <div class="row justify-content-start">
           <div class="col col-auto"></div>
-          <div class="col col-2"></div>
+          <div class="col col-1"></div>
           <div class="col col-auto">
             <button class="btn btn-outline-secondary" type="submit" id="button-addTask">Add Task</button>
           </div>
