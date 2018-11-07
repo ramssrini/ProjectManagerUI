@@ -1,121 +1,121 @@
 <form [formGroup]="addProjectForm" (ngSubmit)="onSubmit()">
- <div id="addProjectSection">
-        <div class="row justify-content-start">
-        <div class="col col-auto"></div>
-        <div class="col col-1">
-          <b>Project:</b>
-        </div>
-        <div class="col col-auto"><input type="text" size="78" class="form-control" formControlName="projectName" />          
-        </div>
-      </div>
-      <br>
-      <div class="row justify-content-start">
-          <div class="col col-auto"></div>
-          <div class="col col-1"></div>&nbsp;&nbsp;&nbsp;&nbsp;
-          <div class="col col-auto">
-              <input type="checkbox"  class="form-check-input"  formControlName="startEndDateCheckBox"/>Set Start and End Date
-          </div>
-          <div class="col col-auto">
-            <input type="date" class="form-control" formControlName="startDate" placeholder="Start Date" >
-            </div> 
-            <div class="col col-auto">
-              <input type="date" class="form-control" formControlName="endDate" placeholder="End Date" >
-              </div>
-        </div>
-        <br>
-        <div class="row justify-content-start">
-          <div class="col col-auto"></div>
-          <div class="col col-1">
-            <b><label for="formControlRange">Priority:</label></b>
-          </div>
-          <div class="col col-5">
-            <span class="input-group-text" id="basic-addon1">0<input  size="75" type="range" max="30" min="0" class="form-control-range" id="formControlRange" step="1" formControlName="priority" >30</span>
-          </div>
-        </div>
-        <br>
-        <div class="row justify-content-start">
-          <div class="col col-auto"></div>
-          <div class="col col-1">
-            <b>Manager:</b>
-          </div>
-          <div class="col col-auto">
-            <input type="text"  size="64" class="form-control" formControlName="managerName" >
-            </div>
-            <div class="col col-2">
-              <button class="btn" type="button-rounded" id="button-searchManagerName" (click)="searchManagerName()">Search</button>
-            </div>
-        </div>
-        <br>
-        
-            <div class="row justify-content-start">
-                <div class="col col-auto"></div>
-                <div class="col col-1"></div>
-                <div class="col col-auto" >
-                  <button class="btn btn-outline-secondary"  type="submit" id="button-addPoject">Add</button>
-                </div>
-                <div class="col col-auto">            
-                  <button class="btn btn-outline-secondary" type="button" id="button-reset" (click)="reset()">Reset</button>
-                </div>
-              </div>
-      </div>
-      <hr>
-      <div id="viewProjectSection">
-          <div class="row justify-content-start">
-            
-          <div class="col col-auto"></div>
-          <div class="col col-1"></div>
-          <div class="col col-auto"><input type="text" size="78" class="form-control" formControlName="projectSearchName" placeholder="Search..." />          
-                    </div>
-        </div>
-        <br>
-        <div class="row justify-content-start">
-            
-          <div class="col col-auto"></div>
-          <div class="col col-1"></div>
-          <div class="col">
-            Sort By:&nbsp;&nbsp;
-              <button class="btn" type="button" id="button-sortStartDate" (click)="sortByStartDate(projectSearchText.value)">Start Date</button>&nbsp;&nbsp;
-              <button class="btn" type="button" id="button-sortEndDate" (click)="sortByEndDate(projectSearchText.value)">End Date</button>&nbsp;&nbsp;
-              <button class="btn" type="button" id="button-sortPriority" (click)="sortByPriority(projectSearchText.value)">Priority</button>&nbsp;&nbsp;
-              <button class="btn" type="button" id="button-sortCompleted" (click)="search(projectSearchText.value)">Completed</button>
-          </div>
-        </div>
-        <br>
-        <div *ngFor="let projectItem of projectList">
-          <div  class="row" >
-              <div class="col col-1"></div>
-            <div class="col col-auto">
-                
-              <div class="card">
-                <div class="card-header" >
-                    Project:&nbsp;&nbsp;{{projectItem.project}}
-                    <br>
-                    <br>
-                    
-                    <div  class="row" >
-                        <div class="col col-auto">No. of Tasks: &nbsp;&nbsp;{{projectItem.numberOfTasks}}</div>
-                        <div class="col col-auto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Completed:&nbsp;&nbsp;{{projectItem.status}}</div></div>
-                        <div  class="row" >
-                            <div class="col col-auto"> 
-                    Start Date: &nbsp;&nbsp;{{projectItem.startDate}}</div> <div class="col col-auto"> &nbsp;&nbsp;End Date:&nbsp;&nbsp;&nbsp;&nbsp;{{projectItem.endDate}}</div>
-                </div>
-              </div>
-            </div>
-            </div>
-            <div class="col col-auto">
-                Priority<br>
-                <div class="card">
-                  <div class="card-header" >{{projectItem.priority}}<br><br><br></div>
-                  
-                </div>  
-              </div>
-              <div class="col">
-                  <br><button class="btn" type="button" id="button-update" (click)="update(taskItem)">Update</button><br><br> <button class="btn" type="button" id="button-suspend" (click)="suspend(taskItem.taskId)">Suspend</button>
-
-                </div>
-              </div>
-              <br>
-        </div>
-
-      </div>
-</form>
+  <div id="addProjectSection">
+         <div class="row justify-content-start">
+         <div class="col col-auto"></div>
+         <div class="col col-1">
+           <b>Project:</b>
+         </div>
+         <div class="col col-auto"><input type="text" size="78" class="form-control" formControlName="projectName" required/>          
+         </div>
+       </div>
+       <br>
+       <div class="row justify-content-start">
+           <div class="col col-auto"></div>
+           <div class="col col-1"></div>&nbsp;&nbsp;
+           <div class="col col-auto">
+               <input type="checkbox"  class="form-check-input"  formControlName="startEndDateCheckBox">&nbsp;&nbsp;&nbsp;&nbsp;Set Start and End Date
+           </div>
+           <div class="col col-auto">
+             <input type="date" class="form-control" formControlName="startDate" placeholder="Start Date"  required>
+             </div> 
+             <div class="col col-auto">
+               <input type="date" class="form-control" formControlName="endDate" placeholder="End Date"  required>
+               </div>
+         </div>
+         <br>
+         <div class="row justify-content-start">
+           <div class="col col-auto"></div>
+           <div class="col col-1">
+             <b><label for="formControlRange">Priority:</label></b>
+           </div>
+           <div class="col col-5">
+             <span class="input-group-text" id="basic-addon1">0<input  size="75" type="range" max="30" min="0" class="form-control-range" id="formControlRange" step="1" formControlName="priority" >30</span>
+           </div>
+         </div>
+         <br>
+         <div class="row justify-content-start">
+           <div class="col col-auto"></div>
+           <div class="col col-1">
+             <b>Manager:</b>
+           </div>
+           <div class="col col-auto">
+             <input type="text"  size="64" class="form-control" formControlName="managerName" >
+             </div>
+             <div class="col col-2">
+               <button class="btn" type="button-rounded" id="button-searchManagerName" (click)="searchManagerName()">Search</button>
+             </div>
+         </div>
+         <br>
+         
+             <div class="row justify-content-start">
+                 <div class="col col-auto"></div>
+                 <div class="col col-1"></div>
+                 <div class="col col-auto" >
+                   <button class="btn"  type="submit" id="button-addPoject">Add</button>
+                 </div>
+                 <div class="col col-auto">            
+                   <button class="btn" type="button" id="button-reset" (click)="reset()">Reset</button>
+                 </div>
+               </div>
+       </div>
+       <hr>
+       <div id="viewProjectSection">
+           <div class="row justify-content-start">
+             
+           <div class="col col-auto"></div>
+           <div class="col col-1"></div>
+           <div class="col col-auto"><input type="text" #projectSearchText size="78" class="form-control" formControlName="projectSearchName" placeholder="Search..." />          
+                     </div>
+         </div>
+         <br>
+         <div class="row justify-content-start">
+             
+           <div class="col col-auto"></div>
+           <div class="col col-1"></div>
+           <div class="col">
+             Sort By:&nbsp;&nbsp;
+               <button class="btn" type="button" id="button-sortStartDate" (click)="sortByStartDate(projectSearchText.value)">Start Date</button>&nbsp;&nbsp;
+               <button class="btn" type="button" id="button-sortEndDate" (click)="sortByEndDate(projectSearchText.value)">End Date</button>&nbsp;&nbsp;
+               <button class="btn" type="button" id="button-sortPriority" (click)="sortByPriority(projectSearchText.value)">Priority</button>&nbsp;&nbsp;
+               <button class="btn" type="button" id="button-sortCompleted" (click)="search(projectSearchText.value)">Completed</button>
+           </div>
+         </div>
+         <br>
+         <div *ngFor="let projectItem of projectList">
+           <div  class="row" >
+               <div class="col col-1"></div>
+             <div class="col col-auto">
+                 
+               <div class="card">
+                 <div class="card-header" >
+                     Project:&nbsp;&nbsp;{{projectItem.project}}
+                     <br>
+                     <br>
+                     
+                     <div  class="row" >
+                         <div class="col col-auto">No. of Tasks: &nbsp;&nbsp;{{projectItem.numberOfTasks}}</div>
+                         <div class="col col-auto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Completed:&nbsp;&nbsp;{{projectItem.status}}</div></div>
+                         <div  class="row" >
+                             <div class="col col-auto"> 
+                     Start Date: &nbsp;&nbsp;{{projectItem.startDate}}</div> <div class="col col-auto"> &nbsp;&nbsp;End Date:&nbsp;&nbsp;&nbsp;&nbsp;{{projectItem.endDate}}</div>
+                 </div>
+               </div>
+             </div>
+             </div>
+             <div class="col col-auto">
+                 Priority<br>
+                 <div class="card">
+                   <div class="card-header" >{{projectItem.priority}}<br><br><br></div>
+                   
+                 </div>  
+               </div>
+               <div class="col">
+                   <br><button class="btn" type="button" id="button-update" (click)="update(taskItem)">Update</button><br><br> <button class="btn" type="button" id="button-suspend" (click)="suspend(taskItem.taskId)">Suspend</button>
+ 
+                 </div>
+               </div>
+               <br>
+         </div>
+ 
+       </div>
+ </form>

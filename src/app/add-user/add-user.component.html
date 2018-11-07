@@ -1,107 +1,115 @@
 <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
-    <div id="addUserSection">
-           <div class="row justify-content-start">
+
+  <div id="addUserSection">
+    <div id = 'validationError' style="display:none" class = "alert alert-danger">
+      name required
+    </div>
+      <div *ngIf="validationError"  class="alert alert-danger">
+        Please populate First name, Last Name and Employee ID          
+       </div>
+         <div class="row justify-content-start">
+         <div class="col col-auto"></div>
+         <div class="col col-1">
+           <b>First Name:</b>
+         </div>
+         <div class="col col-auto"><input type="text" size="75" class="form-control" formControlName="firstName" required/>          
+         </div>
+         
+       </div>
+       <br> 
+       <div class="row justify-content-start">
+          <div class="col col-auto"></div>
+          <div class="col col-1">
+            <b>Last Name:</b>
+          </div>
+          <div class="col col-auto"><input type="text" size="75" class="form-control" formControlName="lastName" required />          
+          </div>
+        </div>
+        <br>
+        <div class="row justify-content-start">
            <div class="col col-auto"></div>
            <div class="col col-1">
-             <b>First Name:</b>
+             <b>Employee ID:</b>
            </div>
-           <div class="col col-auto"><input type="text" size="75" class="form-control" formControlName="firstName" />          
+           <div class="col col-auto"><input type="text" size="20" class="form-control" formControlName="employeeId" required/>          
            </div>
          </div>
-         <br> 
-         <div class="row justify-content-start">
-            <div class="col col-auto"></div>
-            <div class="col col-1">
-              <b>Last Name:</b>
-            </div>
-            <div class="col col-auto"><input type="text" size="75" class="form-control" formControlName="lastName" />          
-            </div>
-          </div>
-          <br>
-          <div class="row justify-content-start">
-             <div class="col col-auto"></div>
-             <div class="col col-1">
-               <b>Employee ID:</b>
-             </div>
-             <div class="col col-auto"><input type="text" size="20" class="form-control" formControlName="employeeId" />          
-             </div>
-           </div>
-           <br>
+         <br>
+       
          
-           
-               <div class="row justify-content-start">
-                   <div class="col col-auto"></div>
-                   <div class="col col-1"></div>
-                   <div class="col col-auto" >
-                     <button class="btn btn-outline-secondary"  type="submit" id="button-addUser">Add</button>
-                   </div>
-                   <div class="col col-auto">            
-                     <button class="btn btn-outline-secondary" type="button" id="button-reset" (click)="reset()">Reset</button>
-                   </div>
-                 </div>
-         </div>
-         <hr>
-         <div id="viewUserSection">
              <div class="row justify-content-start">
-               
-             <div class="col col-auto"></div>
-             <div class="col col-1"></div>
-             <div class="col col-auto"><input type="text" size="25" class="form-control" formControlName="userSearchName" placeholder="Search..." />          
-                       </div>
-                <div class="col col-auto">Sort By:&nbsp;&nbsp;
-                 <button class="btn" type="button" id="button-sortFirstName" (click)="sortByFirstName(projectSearchText.value)">First Name</button>&nbsp;&nbsp;
-                 <button class="btn" type="button" id="button-sortLastName" (click)="sortByLastName(projectSearchText.value)">Last Name</button>&nbsp;&nbsp;
-                 <button class="btn" type="button" id="button-sortId" (click)="sortById(projectSearchText.value)">Id</button>&nbsp;&nbsp;
+                 <div class="col col-auto"></div>
+                 <div class="col col-1"></div>
+                 <div class="col col-auto" >
+                   <button class="btn"  type="submit" id="button-addUser">Add</button>
                  </div>
-           </div>
-         
-           <br>
-           <div *ngFor="let userItem of userList">
-              <div  class="row" >
+                 <div class="col col-auto">            
+                   <button class="btn" type="button" id="button-reset" (click)="reset()">Reset</button>
+                 </div>
+               </div>
+       </div>
+       <hr>
+       <div id="viewUserSection">
+           <div class="row justify-content-start">
+             
+           <div class="col col-auto"></div>
+           <div class="col col-1"></div>
+           <div class="col col-auto"><input type="text" #userSearchName size="25" class="form-control" formControlName="userSearchName" placeholder="Search..." />          
+                     </div>
+              <div class="col col-auto">Sort By:&nbsp;&nbsp;
+               <button class="btn" type="button" id="button-sortFirstName" (click)="sortByFirstName(userSearchName.value)">First Name</button>&nbsp;&nbsp;
+               <button class="btn" type="button" id="button-sortLastName" (click)="sortByLastName(userSearchName.value)">Last Name</button>&nbsp;&nbsp;
+               <button class="btn" type="button" id="button-sortId" (click)="sortById(userSearchName.value)">Id</button>&nbsp;&nbsp;
+               </div>
+         </div>
+       
+         <br>
+         <div *ngFor="let userItem of userList">
+            <div  class="row" >
+                <div class="col col-auto"></div>
+                <div class="col col-1"></div>
+                 <div class="col col-4">
+                  
+                  <div class="card">
+                    <div class="card-header" >
+                     {{userItem.firstName}}                      
+                  </div>
+                 </div>
+                 </div>
+                 <div class="col col-auto">
+                    <button class="btn" type="button" id="button-edit" (click)="edit(taskItem)">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
+               
+                  </div>
+               </div>
+               <div  class="row" >
                   <div class="col col-auto"></div>
-                  <div class="col col-1"></div>
-                   <div class="col col-4">
+                 <div class="col col-1"></div>
+                 <div class="col col-4">
+                    <div class="card">
+                    <div class="card-header" >{{userItem.lastName}}</div>
+                    
+                    </div>  
+                  </div>
+                  <div class="col col-auto">
+                    <button class="btn" type="button" id="button-delete" (click)="suspend(taskItem.taskId)">Delete</button>
+               
+                  </div>
+               </div>
+               <div  class="row" >
+                  <div class="col col-auto"></div>
+                <div class="col col-1"></div>
+                  <div class="col col-4">
                     
                     <div class="card">
-                      <div class="card-header" >
-                       {{userItem.firstName}}                      
+                    <div class="card-header" >
+                     {{userItem.employeeId}}                      
                     </div>
-                   </div>
-                   </div>
-                   <div class="col col-auto">
-                      <button class="btn" type="button" id="button-edit" (click)="edit(taskItem)">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
-                 
-                    </div>
-                 </div>
-                 <div  class="row" >
-                    <div class="col col-auto"></div>
-                   <div class="col col-1"></div>
-                   <div class="col col-4">
-                      <div class="card">
-                      <div class="card-header" >{{userItem.lastName}}</div>
-                      
-                      </div>  
-                    </div>
-                    <div class="col col-auto">
-                      <button class="btn" type="button" id="button-delete" (click)="suspend(taskItem.taskId)">Delete</button>
-                 
-                    </div>
-                 </div>
-                 <div  class="row" >
-                    <div class="col col-auto"></div>
-                  <div class="col col-1"></div>
-                    <div class="col col-4">
-                      
-                      <div class="card">
-                      <div class="card-header" >
-                       {{userItem.employeeId}}                      
-                      </div>
-                    </div>
-                    </div>
-                 </div>
-                 <br>
-                 <hr>
-           </div>
-   
+                  </div>
+                  </div>
+               </div>
+               <br>
+               <hr>
          </div>
-   </form>
+ 
+       </div>
+ </form>
