@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ProjectVO } from '../project';
 import { USERS } from '../mockUsers';
+import { DateFormatPipe } from '../dateFormat.pipe';
 
 @Component({
   selector: 'app-add-project',
@@ -15,7 +16,7 @@ export class AddProjectComponent implements OnInit {
   public userList = USERS;
   addProjectForm : FormGroup;
   tempProjects : Array<ProjectVO>;
-  constructor( private route: ActivatedRoute,  private router : Router){
+  constructor( private route: ActivatedRoute,  private router : Router, private _dateFormatPipe:DateFormatPipe){
     this.createForm();
    }
 
@@ -26,7 +27,7 @@ export class AddProjectComponent implements OnInit {
       startEndDateCheckBox: new FormControl(),
       startDate: new FormControl(),
       endDate: new FormControl(),
-      priority:new FormControl(),
+      priority:new FormControl({value:0}),
       managerName:new FormControl(),
       projectSearchName:new FormControl()
     });
@@ -90,5 +91,26 @@ export class AddProjectComponent implements OnInit {
   populateUserName(selectedUserName){
     this.addProjectForm.get("managerName").setValue(selectedUserName);
 
+  }
+
+
+  defaultDates()
+  {
+    let element = <HTMLInputElement> document.getElementById("startEndDateCheckBox");  
+    if(element.checked == true)
+    {
+      this.addProjectForm.get("startDate").enable();
+      this.addProjectForm.get("endDate").enable();
+      let currentDate = new Date();
+      currentDate.setDate(currentDate.getDate() + parseInt("1"));
+      this.addProjectForm.get("startDate").setValue(this._dateFormatPipe.transform(new Date()));
+      this.addProjectForm.get("endDate").setValue(this._dateFormatPipe.transform(currentDate));
+    }
+    else {
+      this.addProjectForm.get("startDate").disable();
+      this.addProjectForm.get("endDate").disable();
+      this.addProjectForm.get("startDate").setValue("");
+      this.addProjectForm.get("endDate").setValue("");
+    }
   }
 }

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PROJECTS } from '../mockProjects';
 import { USERS } from '../mockUsers';
 import { TASKS } from '../mockTasks';
+import { DateFormatPipe } from '../dateFormat.pipe';
 
 @Component({
   selector: 'app-addtask',
@@ -20,7 +21,7 @@ export class AddtaskComponent implements OnInit {
   public taskList = TASKS;
   public projectSearchText : string;
   // taskName = new FormControl('');
-  constructor(public service: TaskManagerService,  private route: ActivatedRoute,  private router : Router){
+  constructor(public service: TaskManagerService,  private route: ActivatedRoute,  private router : Router, private _dateFormatPipe:DateFormatPipe){
       //  service.getTask();
       this.createForm();
   }
@@ -39,6 +40,11 @@ export class AddtaskComponent implements OnInit {
       userName: new FormControl(),
       parentCheckBox : new FormControl()
     });
+
+    let currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + parseInt("1"));
+    this.addTaskForm.get("startDate").setValue(this._dateFormatPipe.transform(new Date()));
+    this.addTaskForm.get("endDate").setValue(this._dateFormatPipe.transform(currentDate));
   }
 
   newTask = new TaskVO();
@@ -79,6 +85,27 @@ export class AddtaskComponent implements OnInit {
   reset()
   {
     this.createForm();
+  }
+
+  onclickParentCheckbox()
+  {
+    let element = <HTMLInputElement> document.getElementById("parentCheckBox");  
+
+    let parentTaskSearchButtonElement = <HTMLInputElement>document.getElementById("parentTaskSearchButton");
+    if(element.checked == true)
+    {
+      this.addTaskForm.get("priority").disable();
+      this.addTaskForm.get("startDate").disable();
+      this.addTaskForm.get("endDate").disable();
+      parentTaskSearchButtonElement.disabled = true;
+    }
+      
+    else {
+      this.addTaskForm.get("priority").enable();
+      this.addTaskForm.get("startDate").enable();
+      this.addTaskForm.get("endDate").enable();
+      parentTaskSearchButtonElement.disabled = false;
+  }
   }
 
 }

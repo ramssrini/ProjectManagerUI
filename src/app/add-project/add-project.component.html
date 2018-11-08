@@ -13,13 +13,13 @@
            <div class="col col-auto"></div>
            <div class="col col-1"></div>&nbsp;&nbsp;
            <div class="col col-auto">
-               <input type="checkbox"  class="form-check-input"  formControlName="startEndDateCheckBox">&nbsp;&nbsp;&nbsp;&nbsp;Set Start and End Date
+               <input type="checkbox"  class="form-check-input" id="startEndDateCheckBox" formControlName="startEndDateCheckBox" (click)="defaultDates()">&nbsp;&nbsp;&nbsp;&nbsp;Set Start and End Date
            </div>
            <div class="col col-auto">
-             <input type="date" class="form-control" formControlName="startDate" placeholder="Start Date"  required>
+             <input type="date" class="form-control" formControlName="startDate" disabled placeholder="Start Date"  required >
              </div> 
              <div class="col col-auto">
-               <input type="date" class="form-control" formControlName="endDate" placeholder="End Date"  required>
+               <input type="date" class="form-control" formControlName="endDate" disabled placeholder="End Date"  required>
                </div>
          </div>
          <br>
@@ -28,7 +28,7 @@
            <div class="col col-1">
              <b><label for="formControlRange">Priority:</label></b>
            </div>
-           <div class="col col-5">
+           <div class="col col-4">
              <span class="input-group-text" id="basic-addon1">0<input  size="75" type="range" max="30" min="0" class="form-control-range" id="formControlRange" step="1" formControlName="priority" >30</span>
            </div>
          </div>
@@ -39,7 +39,7 @@
              <b>Manager:</b>
            </div>
            <div class="col col-auto">
-             <input type="text"  size="64" class="form-control" formControlName="managerName" >
+             <input type="text"  size="64" class="form-control" formControlName="managerName"  disabled>
              </div>
              <div class="col col-2">
                <button   class="btn" type="button" data-toggle="modal" data-target="#userSearchModal">Search</button>
@@ -84,7 +84,7 @@
          <div *ngFor="let projectItem of projectList">
            <div  class="row" >
                <div class="col col-1"></div>
-             <div class="col col-auto">
+             <div class="col col-4">
                  
                <div class="card">
                  <div class="card-header" >
@@ -110,7 +110,7 @@
                  </div>  
                </div>
                <div class="col">
-                   <br><button class="btn" type="button" id="button-update" (click)="update(taskItem)">Update</button><br><br> <button class="btn" type="button" id="button-suspend" (click)="suspend(taskItem.taskId)">Suspend</button>
+                   <button class="btn" type="button" id="button-update" (click)="update(taskItem)">Update</button><br><br> <button class="btn" type="button" id="button-suspend" (click)="suspend(taskItem.taskId)">Suspend</button>
  
                  </div>
                </div>

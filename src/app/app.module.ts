@@ -20,6 +20,7 @@ import { FilterTaskByEndDate } from './filterTaskByEndDate.pipe';
 import { AddProjectComponent } from './add-project/add-project.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { FilterUserNamePipe } from './filterUserName.pipe';
+import { DateFormatPipe } from './dateFormat.pipe';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { FilterUserNamePipe } from './filterUserName.pipe';
     RouterModule
   ],
   providers: [
-    TaskManagerService],
+    TaskManagerService, DateFormatPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
