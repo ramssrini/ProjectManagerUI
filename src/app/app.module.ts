@@ -8,6 +8,7 @@ import { ViewtaskComponent } from './viewtask/viewtask.component';
 import { AddtaskComponent } from './addtask/addtask.component';
 import { UpdatetaskComponent } from './updatetask/updatetask.component';
 import { FilterPipe} from './filter.pipe';
+import { FilterProjectPipe} from './filterProject.pipe';
 import { FilterParentTaskPipe } from './filterParentTask.pipe.';
 import { FilterPriorityTaskPipe } from './filterTaskByPriority.pipe';
 import { RouterModule , Routes} from '@angular/router';
@@ -18,6 +19,7 @@ import { FilterTaskByStartDate } from './filterTaskByStartDate.pipe';
 import { FilterTaskByEndDate } from './filterTaskByEndDate.pipe';
 import { AddProjectComponent } from './add-project/add-project.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { FilterUserNamePipe } from './filterUserName.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { AddUserComponent } from './add-user/add-user.component';
     FilterPriorityTaskPipeTo,
     FilterTaskByStartDate,
     FilterTaskByEndDate,
+    FilterProjectPipe,
+    FilterUserNamePipe,
     AddProjectComponent,
     AddUserComponent
   ],

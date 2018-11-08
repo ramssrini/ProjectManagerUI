@@ -10,7 +10,7 @@
     
   </div>
   <div class="col col-2">
-  <button class="btn" type="button-rounded" id="button-searchProject" (click)="search()">Search</button>
+  <button class="btn" type="button" data-toggle="modal" data-target="#projectSearchModal">Search</button>
   </div>
   
 </div>
@@ -43,7 +43,7 @@
       <input type="text"  size="64" class="form-control" formControlName="parentTaskName" >
       </div>
       <div class="col col-2">
-        <button class="btn" type="button-rounded" id="button-searchParentTask" (click)="searchParentTask()">Search</button>
+        <button  class="btn" type="button" data-toggle="modal" data-target="#parentTaskSearchModal">Search</button>
       </div>
   </div>
   <br>
@@ -68,10 +68,10 @@
         <b>User:</b>
       </div>
       <div class="col col-auto">
-        <input type="text"  size="64" class="form-control" formControlName="userName" >
+        <input type="text"  size="64" class="form-control" formControlName="userName"/>
         </div>
         <div class="col col-2">
-          <button class="btn" type="button-rounded" id="button-searchUser" (click)="searchUser()">Search</button>
+          <button  class="btn" type="button" data-toggle="modal" data-target="#userSearchModal">Search</button>
         </div>
     </div>
       <br>
@@ -86,4 +86,108 @@
           </div>
         </div>
 </div>
+
+
 </form>
+<!-- Modal -->
+<div class="modal fade" id="projectSearchModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col">
+                    <b>Project :</b> <input [(ngModel)]="projectSearchText">
+                </div>
+            </div>
+            <div class="row" *ngFor="let projectItem of projectList | filterProject : projectSearchText">
+                <div class="col">
+                  <div class="card" (click)="populateProjectName(projectItem.project)" data-dismiss="modal">
+                    <div class="card-header" >
+                      <h5 class="card-title">{{projectItem.project}}</h5>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="modal fade" id="parentTaskSearchModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col">
+                      <b>Project :</b> <input [(ngModel)]="parentTaskSearchText">
+                  </div>
+              </div>
+              <div class="row" *ngFor="let taskItem of taskList | filterParentTask : parentTaskSearchText">
+                  <div class="col">
+                    <div class="card" (click)="populateParentTask(taskItem.parentTask)" data-dismiss="modal">
+                      <div class="card-header" >
+                        <h5 class="card-title">{{taskItem.parentTask}}</h5>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="modal fade" id="userSearchModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <b>User Name :</b> <input [(ngModel)]="userNameSearchText">
+                    </div>
+                </div>
+                <div class="row" *ngFor="let userItem of userList | filterUserName : userNameSearchText">
+                    <div class="col">
+                      <div class="card" (click)="populateUserName(userItem.lastName + ' ' + userItem.firstName)" data-dismiss="modal">
+                        <div class="card-header" >
+                          <h5 class="card-title">{{userItem.lastName+ ' ' + userItem.firstName}}</h5>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>

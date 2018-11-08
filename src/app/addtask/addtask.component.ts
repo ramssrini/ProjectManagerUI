@@ -3,6 +3,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { TaskVO } from '../task';
 import { TaskManagerService } from '../services/taskmanager.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PROJECTS } from '../mockProjects';
+import { USERS } from '../mockUsers';
+import { TASKS } from '../mockTasks';
 
 @Component({
   selector: 'app-addtask',
@@ -12,6 +15,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AddtaskComponent implements OnInit {
   addTaskForm : FormGroup;
   public validationError = false;
+  public projectList = PROJECTS;
+  public userList = USERS;
+  public taskList = TASKS;
+  public projectSearchText : string;
   // taskName = new FormControl('');
   constructor(public service: TaskManagerService,  private route: ActivatedRoute,  private router : Router){
       //  service.getTask();
@@ -57,7 +64,18 @@ export class AddtaskComponent implements OnInit {
       this.validationError = false;
     }
   }
+  populateProjectName(selectedProject){
+    this.addTaskForm.get("projectName").setValue(selectedProject);
 
+  }
+  populateParentTask(selectedParentTask){
+    this.addTaskForm.get("parentTaskName").setValue(selectedParentTask);
+
+  }
+  populateUserName(selectedUserName){
+    this.addTaskForm.get("userName").setValue(selectedUserName);
+
+  }
   reset()
   {
     this.createForm();

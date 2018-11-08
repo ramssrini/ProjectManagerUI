@@ -3,6 +3,7 @@ import { PROJECTS } from '../mockProjects';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ProjectVO } from '../project';
+import { USERS } from '../mockUsers';
 
 @Component({
   selector: 'app-add-project',
@@ -11,6 +12,7 @@ import { ProjectVO } from '../project';
 })
 export class AddProjectComponent implements OnInit {
   public projectList = PROJECTS;
+  public userList = USERS;
   addProjectForm : FormGroup;
   tempProjects : Array<ProjectVO>;
   constructor( private route: ActivatedRoute,  private router : Router){
@@ -85,5 +87,8 @@ export class AddProjectComponent implements OnInit {
     }
     this.projectList = this.tempProjects;
   }
+  populateUserName(selectedUserName){
+    this.addProjectForm.get("managerName").setValue(selectedUserName);
 
+  }
 }
