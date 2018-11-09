@@ -5,6 +5,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ProjectVO } from '../project';
 import { USERS } from '../mockUsers';
 import { DateFormatPipe } from '../dateFormat.pipe';
+import { ProjectManagerService } from '../services/projectmanager.service';
 
 @Component({
   selector: 'app-add-project',
@@ -12,14 +13,21 @@ import { DateFormatPipe } from '../dateFormat.pipe';
   styleUrls: ['./add-project.component.css']
 })
 export class AddProjectComponent implements OnInit {
-  public projectList = PROJECTS;
+  public projectList :Array<ProjectVO> = [
+   
+  ];
   public userList = USERS;
+  public validationError = false;
   addProjectForm : FormGroup;
   tempProjects : Array<ProjectVO>;
-  constructor( private route: ActivatedRoute,  private router : Router, private _dateFormatPipe:DateFormatPipe){
+  constructor(public service: ProjectManagerService, private route: ActivatedRoute,  private router : Router, private _dateFormatPipe:DateFormatPipe){
     this.createForm();
+    this.getProjects();
    }
-
+   getProjects()
+   {
+     this.service.getProjects().then(data => this.projectList = data);
+   }
    createForm()
   {
     this.addProjectForm = new FormGroup({
@@ -31,6 +39,28 @@ export class AddProjectComponent implements OnInit {
       managerName:new FormControl(),
       projectSearchName:new FormControl()
     });
+  }
+
+  newProject = new ProjectVO();
+  onSubmit()
+  {
+    if(this.addProjectForm.get("projectName").status == "INVALID"
+      || this.addProjectForm.get("startDate").status == "INVALID"
+      || this.addProjectForm.get("endDate").status == "INVALID"
+      || this.addProjectForm.get("priority").status == "INVALID")
+    {
+      this.validationError = true;
+    }
+    else{
+      this.validationError = false;
+       this.newProject.project = this.addProjectForm.get("projectName").value;
+      this.newProject.startDate = this.addProjectForm.get("startDate").value;
+      this.newProject.endDate = this.addProjectForm.get("endDate").value;
+      this.newProject.priority = this.addProjectForm.get("priority").value;
+      console.log(this.newProject);
+      this.service.addProjectInfo(this.newProject);
+      // window.location.reload();
+    }
   }
 
   ngOnInit() {
@@ -112,5 +142,9 @@ export class AddProjectComponent implements OnInit {
       this.addProjectForm.get("startDate").setValue("");
       this.addProjectForm.get("endDate").setValue("");
     }
+  }
+
+  reset(){
+    this.createForm();
   }
 }

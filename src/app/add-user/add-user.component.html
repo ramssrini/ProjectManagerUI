@@ -1,9 +1,7 @@
 <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
 
   <div id="addUserSection">
-    <div id = 'validationError' style="display:none" class = "alert alert-danger">
-      name required
-    </div>
+   
       <div *ngIf="validationError"  class="alert alert-danger">
         Please populate First name, Last Name and Employee ID          
        </div>
@@ -77,7 +75,7 @@
                  </div>
                  </div>
                  <div class="col col-auto">
-                    <button class="btn" type="button" id="button-edit" (click)="edit(taskItem)">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
+                    <button class="btn" type="button" id="button-edit" (click)="edit(userItem)">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
                
                   </div>
                </div>
@@ -91,7 +89,7 @@
                     </div>  
                   </div>
                   <div class="col col-auto">
-                    <button class="btn" type="button" id="button-delete" (click)="suspend(taskItem.taskId)">Delete</button>
+                    <button class="btn" type="button" id="button-delete" (click)="delete(userItem.userId)">Delete</button>
                
                   </div>
                </div>

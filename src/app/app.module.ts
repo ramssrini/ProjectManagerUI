@@ -21,6 +21,8 @@ import { AddProjectComponent } from './add-project/add-project.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { FilterUserNamePipe } from './filterUserName.pipe';
 import { DateFormatPipe } from './dateFormat.pipe';
+import { UserManagerService } from './services/usermanager.service';
+import { ProjectManagerService } from './services/projectmanager.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,7 @@ import { DateFormatPipe } from './dateFormat.pipe';
     RouterModule
   ],
   providers: [
-    TaskManagerService, DateFormatPipe],
+    TaskManagerService, DateFormatPipe, UserManagerService, ProjectManagerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

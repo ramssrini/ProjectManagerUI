@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { USERS } from '../mockUsers';
 import { UserVO } from '../user';
+import { UserManagerService } from '../services/usermanager.service';
 
 @Component({
   selector: 'app-add-user',
@@ -11,26 +11,34 @@ import { UserVO } from '../user';
 })
 export class AddUserComponent implements OnInit {
   
-  public userList = USERS;
+  public userList :Array<UserVO> = [
+   
+  ];
   public validationError = false;
   tempUsers : Array<UserVO>;
-  public addUserForm = new FormGroup({name : new FormControl(),
-    firstName: new FormControl(),
-    lastName: new FormControl(),
-    employeeId: new FormControl(),
-    userSearchName: new FormControl()
-  });
-  constructor( private route: ActivatedRoute,  private router : Router){
+  addUserForm : FormGroup;
+  constructor(public service:UserManagerService, private route: ActivatedRoute,  private router : Router){
     this.createForm();
+    this.getUsers();
    }
   ngOnInit() {
   }
+
+  getUsers()
+  {
+    this.service.getUsers().then(data => this.userList = data);
+  }
   createForm()
   {
-
+    this.addUserForm = new FormGroup({name : new FormControl(),
+      firstName: new FormControl(),
+      lastName: new FormControl(),
+      employeeId: new FormControl(),
+      userSearchName: new FormControl()
+    });
     
   }
-
+  newUser = new UserVO();
   onSubmit()
   {
     if(this.addUserForm.get("firstName").status == "INVALID"
@@ -41,25 +49,29 @@ export class AddUserComponent implements OnInit {
     }
     else{
       this.validationError = false;
-      // TODO : Add the service call here
+       this.newUser.firstName = this.addUserForm.get("firstName").value
+      this.newUser.lastName = this.addUserForm.get("lastName").value
+      this.newUser.employeeId = this.addUserForm.get("employeeId").value
+      console.log(this.newUser);
+      this.service.addUserInfo(this.newUser);
+      window.location.reload();
     }
   }
 
   sortByFirstName(userSearch){
-    console.log(userSearch);
     this.search(userSearch);
+    console.log(this.userList);
     this.userList.sort((n1,n2) => { return n1.firstName.localeCompare( n2.firstName)});
   }
 
   sortByLastName(userSearch){
-    console.log(userSearch);
     
     this.search(userSearch);
+    console.log(this.userList);
     this.userList.sort((n1,n2) => { return n1.lastName.localeCompare( n2.lastName)});
   }
 
   sortById(userSearch){
-    console.log(userSearch);
     
     this.search(userSearch);
     this.userList.sort((n1,n2) => { return n1.employeeId.localeCompare( n2.employeeId)});
@@ -85,7 +97,7 @@ export class AddUserComponent implements OnInit {
   search(userSearch)
   {
     
-    this.userList = USERS;
+    this.getUsers();
     this.tempUsers = [];
     for(let userItem of this.userList) {
       if(userItem.firstName.toLowerCase().includes(userSearch.toLowerCase())
@@ -98,5 +110,14 @@ export class AddUserComponent implements OnInit {
     this.userList = this.tempUsers;
   }
 
+  reset(){
+    this.createForm();
+  }
+
+  delete(userId)
+  {
+    this.service.delete(userId);
+    window.location.reload();
+  }
 
 }
