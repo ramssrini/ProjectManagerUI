@@ -18,6 +18,13 @@ getTasks(): Promise<any>{
    
 }
 
+getParentTasks(): Promise<any>{
+  return this.http.get(this.baseUrl+"getParentTasks")
+   .toPromise()
+   .then(res=>res.json());
+   
+}
+
 getTasksById(id): Observable<any>{
   return this.http.get(this.baseUrl+"getTask?id="+id);
    

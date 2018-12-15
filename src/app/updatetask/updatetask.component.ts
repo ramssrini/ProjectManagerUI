@@ -39,7 +39,7 @@ export class UpdatetaskComponent implements OnInit {
   newTask = new TaskVO();
   onSubmit(){
     this.newTask.task = this.updateTaskForm.get("taskName").value
-    this.newTask.taskId = parseInt(this.selectedId);
+    this.newTask.taskId = this.selectedId;
     this.newTask.parentTask = this.updateTaskForm.get("parentTaskName").value
     this.newTask.priority = this.updateTaskForm.get("priority").value
     this.newTask.startDate = this.updateTaskForm.get("startDate").value

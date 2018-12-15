@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { PROJECTS } from '../mockProjects';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ProjectVO } from '../project';
-import { USERS } from '../mockUsers';
 import { DateFormatPipe } from '../dateFormat.pipe';
 import { ProjectManagerService } from '../services/projectmanager.service';
+import { UserVO } from '../user';
+import { UserManagerService } from '../services/usermanager.service';
 
 @Component({
   selector: 'app-add-project',
@@ -16,17 +16,24 @@ export class AddProjectComponent implements OnInit {
   public projectList :Array<ProjectVO> = [
    
   ];
-  public userList = USERS;
+  public userList :Array<UserVO> = [
+   
+  ];
   public validationError = false;
   addProjectForm : FormGroup;
   tempProjects : Array<ProjectVO>;
-  constructor(public service: ProjectManagerService, private route: ActivatedRoute,  private router : Router, private _dateFormatPipe:DateFormatPipe){
+  constructor(public service: ProjectManagerService, public userService: UserManagerService, private route: ActivatedRoute,  private router : Router, private _dateFormatPipe:DateFormatPipe){
     this.createForm();
     this.getProjects();
+    this.getUsers();
    }
    getProjects()
    {
      this.service.getProjects().then(data => this.projectList = data);
+   }
+   getUsers()
+   {
+     this.userService.getUsers().then(data => this.userList = data);
    }
    createForm()
   {
@@ -104,8 +111,7 @@ export class AddProjectComponent implements OnInit {
 
   search(projectSearch)
   {
-    
-    this.projectList = PROJECTS;
+    this.service.getProjects().then(data => this.projectList = data);
     this.tempProjects = [];
     for(let projectItem of this.projectList) {
       if(projectItem.project.toLowerCase().includes(projectSearch.toLowerCase()))

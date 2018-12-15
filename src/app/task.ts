@@ -1,6 +1,8 @@
 export class TaskVO {
-    taskId : number;
-    parentTaskId : number;
+    taskId : string;
+    parentId : string;
+    userId : string;
+    projectId : string;
     parentTask : string;
     task : string;
     startDate : string;

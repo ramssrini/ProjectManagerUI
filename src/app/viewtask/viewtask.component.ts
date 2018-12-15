@@ -1,6 +1,5 @@
 
 import { Component, OnInit } from '@angular/core';
-import {TASKS} from'../mockTasks'
 import { TaskManagerService } from '../services/taskmanager.service';
 import { TaskVO } from '../task';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,10 +17,10 @@ export class ViewtaskComponent implements OnInit {
   public tasksearchText : string;
   tempTasks : Array<TaskVO>;
   // private router: Router;
-  public taskList = TASKS;
+  public taskList : Array<TaskVO>;
   constructor(public service: TaskManagerService,  private route: ActivatedRoute, private router : Router){
-    // this.service.getTasks().then(data => this.taskList = data);
-    // console.log(this.taskList);
+    this.service.getTasks().then(data => this.taskList = data);
+    console.log(this.taskList);
   }
 
   ngOnInit() {
@@ -44,6 +43,7 @@ export class ViewtaskComponent implements OnInit {
   sortByPriority(projectSearch){
     
     this.search(projectSearch);
+    console.log(this.taskList);
     this.taskList.sort((n1,n2) => { return n1.priority - n2.priority});
   }
 
@@ -66,16 +66,13 @@ export class ViewtaskComponent implements OnInit {
 
   search(projectSearch)
   {
-    
-    this.taskList = TASKS;
+    this.service.getTasks().then(data => this.taskList = data);
     this.tempTasks = [];
     for(let taskItem of this.taskList) {
       if(taskItem.project.toLowerCase().includes(projectSearch.toLowerCase()))
       {
         this.tempTasks.push(taskItem);
-        console.log(taskItem);
         let newDate = new Date(taskItem.endDate);
-        console.log(newDate)
       }
     }
     this.taskList = this.tempTasks;

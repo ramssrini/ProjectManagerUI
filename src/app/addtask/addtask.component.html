@@ -116,7 +116,7 @@
               </div>
               <div class="row" *ngFor="let projectItem of projectList | filterProject : projectSearchText">
                   <div class="col">
-                    <div class="card" (click)="populateProjectName(projectItem.project)" data-dismiss="modal">
+                    <div class="card" (click)="populateProjectName(projectItem.project, projectItem._id)" data-dismiss="modal">
                       <div class="card-header" >
                         <h5 class="card-title">{{projectItem.project}}</h5>
                       </div>
@@ -148,9 +148,9 @@
                         <b>Project :</b> <input [(ngModel)]="parentTaskSearchText">
                     </div>
                 </div>
-                <div class="row" *ngFor="let taskItem of taskList | filterParentTask : parentTaskSearchText">
+                <div class="row" *ngFor="let taskItem of parentTaskList | filterParentTask : parentTaskSearchText">
                     <div class="col">
-                      <div class="card" (click)="populateParentTask(taskItem.parentTask)" data-dismiss="modal">
+                      <div class="card" (click)="populateParentTask(taskItem.parentTask, taskItem._id)" data-dismiss="modal">
                         <div class="card-header" >
                           <h5 class="card-title">{{taskItem.parentTask}}</h5>
                         </div>
@@ -184,7 +184,7 @@
                   </div>
                   <div class="row" *ngFor="let userItem of userList | filterUserName : userNameSearchText">
                       <div class="col">
-                        <div class="card" (click)="populateUserName(userItem.lastName + ' ' + userItem.firstName)" data-dismiss="modal">
+                        <div class="card" (click)="populateUserName(userItem.lastName + ' ' + userItem.firstName, userItem._id)" data-dismiss="modal">
                           <div class="card-header" >
                             <h5 class="card-title">{{userItem.lastName+ ' ' + userItem.firstName}}</h5>
                           </div>
