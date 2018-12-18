@@ -30,6 +30,7 @@ export class AddUserComponent implements OnInit {
   getUsers()
   {
     this.service.getUsers().then(data => this.userList = data);
+    this.service.getUsers().then(data => this.resetUsers = data);
   }
   createForm()
   {
@@ -80,7 +81,7 @@ export class AddUserComponent implements OnInit {
   search(userSearch)
   {
     this.service.getUsers().then(data => this.resetUsers = data);
-    // this.getUsers();
+    console.log('****resetUsers****' + this.resetUsers);
     this.tempUsers = [];
     for(let userItem of this.resetUsers) {
       if(userItem.firstName.toLowerCase().includes(userSearch.toLowerCase())
@@ -91,6 +92,8 @@ export class AddUserComponent implements OnInit {
       }
     }
     this.userList = this.tempUsers;
+    
+    console.log('**** this.userList****'+ this.userList);
   }
 
   reset(){

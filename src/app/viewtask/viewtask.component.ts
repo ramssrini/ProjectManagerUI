@@ -23,6 +23,7 @@ export class ViewtaskComponent implements OnInit {
   ];
   constructor(public service: TaskManagerService,  private route: ActivatedRoute, private router : Router){
     this.service.getTasks().then(data => this.taskList = data);
+    this.service.getTasks().then(data => this.resetTaskList = data);
   }
 
   ngOnInit() {

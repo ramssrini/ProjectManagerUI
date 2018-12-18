@@ -33,6 +33,7 @@ export class AddProjectComponent implements OnInit {
    getProjects()
    {
      this.service.getProjects().then(data => this.projectList = data);
+     this.service.getProjects().then(data => this.resetProjectList = data);
    }
    getUsers()
    {
@@ -69,7 +70,7 @@ export class AddProjectComponent implements OnInit {
       this.newProject.priority = this.addProjectForm.get("priority").value;
       console.log(this.newProject);
       this.service.addProjectInfo(this.newProject);
-      // window.location.reload();
+      window.location.reload();
     }
   }
 
@@ -155,5 +156,11 @@ export class AddProjectComponent implements OnInit {
 
   reset(){
     this.createForm();
+  }
+
+  suspend(projectid)
+  {
+    this.service.deleteProject(projectid);
+    window.location.reload();
   }
 }
