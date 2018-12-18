@@ -18,9 +18,11 @@ export class ViewtaskComponent implements OnInit {
   tempTasks : Array<TaskVO>;
   // private router: Router;
   public taskList : Array<TaskVO>;
+  public resetTaskList :Array<TaskVO> = [
+   
+  ];
   constructor(public service: TaskManagerService,  private route: ActivatedRoute, private router : Router){
     this.service.getTasks().then(data => this.taskList = data);
-    console.log(this.taskList);
   }
 
   ngOnInit() {
@@ -66,9 +68,9 @@ export class ViewtaskComponent implements OnInit {
 
   search(projectSearch)
   {
-    this.service.getTasks().then(data => this.taskList = data);
+    this.service.getTasks().then(data => this.resetTaskList = data);
     this.tempTasks = [];
-    for(let taskItem of this.taskList) {
+    for(let taskItem of this.resetTaskList) {
       if(taskItem.project.toLowerCase().includes(projectSearch.toLowerCase()))
       {
         this.tempTasks.push(taskItem);

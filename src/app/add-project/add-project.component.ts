@@ -16,6 +16,9 @@ export class AddProjectComponent implements OnInit {
   public projectList :Array<ProjectVO> = [
    
   ];
+  public resetProjectList :Array<ProjectVO> = [
+   
+  ];
   public userList :Array<UserVO> = [
    
   ];
@@ -111,9 +114,9 @@ export class AddProjectComponent implements OnInit {
 
   search(projectSearch)
   {
-    this.service.getProjects().then(data => this.projectList = data);
+    this.service.getProjects().then(data => this.resetProjectList = data);
     this.tempProjects = [];
-    for(let projectItem of this.projectList) {
+    for(let projectItem of this.resetProjectList) {
       if(projectItem.project.toLowerCase().includes(projectSearch.toLowerCase()))
       {
         this.tempProjects.push(projectItem);
