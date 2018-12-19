@@ -47,7 +47,7 @@ export class AddtaskComponent implements OnInit {
       projectName: new FormControl(),
       parentTaskName: new FormControl(),
       parentTaskId: new FormControl(),
-      priority:new FormControl,
+      priority:new FormControl(0),
       startDate: new FormControl(),
       endDate: new FormControl(),
       userName: new FormControl(),

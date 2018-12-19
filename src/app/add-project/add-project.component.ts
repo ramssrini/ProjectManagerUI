@@ -46,7 +46,7 @@ export class AddProjectComponent implements OnInit {
       startEndDateCheckBox: new FormControl(),
       startDate: new FormControl(),
       endDate: new FormControl(),
-      priority:new FormControl({value:0}),
+      priority:new FormControl(0),
       managerName:new FormControl(),
       projectSearchName:new FormControl()
     });
