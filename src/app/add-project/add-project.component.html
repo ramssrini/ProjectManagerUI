@@ -49,7 +49,7 @@
              </div>
          </div>
          <br>
-         
+          <div *ngIf="add">
              <div class="row justify-content-start">
                  <div class="col col-auto"></div>
                  <div class="col col-1"></div>
@@ -60,6 +60,20 @@
                    <button class="btn" type="button" id="button-reset" (click)="reset()">Reset</button>
                  </div>
                </div>
+          </div>
+          <div *ngIf="update">
+               <div class="row justify-content-start">
+                <div class="col col-auto"></div>
+                <div class="col col-1"></div>
+                <div class="col col-auto" >
+                  <button class="btn"  type="submit" id="button-addPoject" (click)="update()">Update</button>
+                </div>
+                <div class="col col-auto">            
+                  <button class="btn" type="button" id="button-reset" (click)="reset()">Reset</button>
+                </div>
+              </div>
+            </div>
+
        </div>
        <hr>
        <div id="viewProjectSection">
@@ -113,7 +127,7 @@
                  </div>  
                </div>
                <div class="col">
-                   <button class="btn" type="button" id="button-update" (click)="update(projectItem)">Update</button><br><br> <button class="btn" type="button" id="button-suspend" (click)="suspend(projectItem._id)">Suspend</button>
+                   <button class="btn" type="button" id="button-update" (click)="edit(projectItem.project, projectItem.startDate, projectItem.endDate, projectItem.priority)">Update</button><br><br> <button class="btn" type="button" id="button-suspend" (click)="suspend(projectItem._id)">Suspend</button>
  
                  </div>
                </div>

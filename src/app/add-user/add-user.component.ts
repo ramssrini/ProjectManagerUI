@@ -15,6 +15,8 @@ export class AddUserComponent implements OnInit {
    
   ];
   public validationError = false;
+  public add = true;
+  public update = false;
   tempUsers : Array<UserVO>;
   resetUsers :Array<UserVO> = [
    
@@ -95,6 +97,8 @@ export class AddUserComponent implements OnInit {
 
   reset(){
     this.createForm();
+    this.add=true;
+    this.update=false;
   }
 
   delete(userId)
@@ -103,4 +107,12 @@ export class AddUserComponent implements OnInit {
     window.location.reload();
   }
 
+  edit(fname, lname, employeeId)
+  {
+    this.addUserForm.get("firstName").setValue(fname);
+    this.addUserForm.get("lastName").setValue(lname);
+    this.addUserForm.get("employeeId").setValue(employeeId);
+    this.add=false;
+    this.update=true;
+  }
 }

@@ -22,6 +22,9 @@ export class AddProjectComponent implements OnInit {
   public userList :Array<UserVO> = [
    
   ];
+  
+  public add = true;
+  public update = false;
   public validationError = false;
   addProjectForm : FormGroup;
   tempProjects : Array<ProjectVO>;
@@ -162,5 +165,16 @@ export class AddProjectComponent implements OnInit {
   {
     this.service.deleteProject(projectid);
     window.location.reload();
+  }
+
+  edit(projectName, startDate, endDate, priority)
+  {
+    
+    this.addProjectForm.get("startDate").setValue(startDate);
+    this.addProjectForm.get("endDate").setValue(endDate);
+    this.addProjectForm.get("projectName").setValue(projectName);
+    this.addProjectForm.get("priority").setValue(priority);
+    this.add=false;
+    this.update=true;
   }
 }

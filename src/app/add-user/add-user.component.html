@@ -34,7 +34,7 @@
          </div>
          <br>
        
-         
+         <div *ngIf="add">
              <div class="row justify-content-start">
                  <div class="col col-auto"></div>
                  <div class="col col-1"></div>
@@ -45,6 +45,19 @@
                    <button class="btn" type="button" id="button-reset" (click)="reset()">Reset</button>
                  </div>
                </div>
+            </div>
+            <div *ngIf="update">
+               <div class="row justify-content-start">
+                <div class="col col-auto"></div>
+                <div class="col col-1"></div>
+                <div class="col col-auto" >
+                  <button class="btn"  type="submit" id="button-addUser" (click)="update()">Update</button>
+                </div>
+                <div class="col col-auto">            
+                  <button class="btn" type="button" id="button-reset" (click)="reset()">Reset</button>
+                </div>
+              </div>
+            </div>
        </div>
        <hr>
        <div id="viewUserSection">
@@ -75,7 +88,7 @@
                  </div>
                  </div>
                  <div class="col col-auto">
-                    <button class="btn" type="button" id="button-edit" (click)="edit(userItem)">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
+                    <button class="btn" type="button" id="button-edit" (click)="edit(userItem.firstName, userItem.lastName, userItem.employeeId)">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
                
                   </div>
                </div>
