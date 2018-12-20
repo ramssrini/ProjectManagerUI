@@ -47,9 +47,9 @@ delete(id): Promise<any>{
   }
 
   updateUserInfo(
-    task : UserVO): Promise<any>{
+    userVo : UserVO): Promise<any>{
 
-      let body = JSON.stringify( task );            
+      let body = JSON.stringify( userVo );            
         let headers = new Headers({ 'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',

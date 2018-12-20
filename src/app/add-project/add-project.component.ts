@@ -159,6 +159,9 @@ export class AddProjectComponent implements OnInit {
 
   reset(){
     this.createForm();
+    
+    this.add=true;
+    this.update=false;
   }
 
   suspend(projectid)

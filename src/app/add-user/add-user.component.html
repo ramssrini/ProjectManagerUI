@@ -1,7 +1,7 @@
 <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
 
   <div id="addUserSection">
-   
+    <input type="hidden" class="form-control" formControlName="userId"/> 
       <div *ngIf="validationError"  class="alert alert-danger">
         Please populate First name, Last Name and Employee ID          
        </div>
@@ -51,7 +51,7 @@
                 <div class="col col-auto"></div>
                 <div class="col col-1"></div>
                 <div class="col col-auto" >
-                  <button class="btn"  type="submit" id="button-addUser" (click)="update()">Update</button>
+                  <button class="btn"  type="button" id="button-addUser" (click)="updateUser()">Update</button>
                 </div>
                 <div class="col col-auto">            
                   <button class="btn" type="button" id="button-reset" (click)="reset()">Reset</button>
@@ -88,7 +88,7 @@
                  </div>
                  </div>
                  <div class="col col-auto">
-                    <button class="btn" type="button" id="button-edit" (click)="edit(userItem.firstName, userItem.lastName, userItem.employeeId)">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
+                    <button class="btn" type="button" id="button-edit" (click)="edit(userItem.firstName, userItem.lastName, userItem.employeeId, userItem._id)">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
                
                   </div>
                </div>

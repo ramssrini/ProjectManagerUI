@@ -37,6 +37,7 @@ export class AddUserComponent implements OnInit {
   createForm()
   {
     this.addUserForm = new FormGroup({name : new FormControl(),
+      userId : new FormControl(),
       firstName: new FormControl(),
       lastName: new FormControl(),
       employeeId: new FormControl(),
@@ -45,6 +46,7 @@ export class AddUserComponent implements OnInit {
     
   }
   newUser = new UserVO();
+  updateUserVo = new UserVO();
   onSubmit()
   {
     if(this.addUserForm.get("firstName").status == "INVALID"
@@ -107,12 +109,25 @@ export class AddUserComponent implements OnInit {
     window.location.reload();
   }
 
-  edit(fname, lname, employeeId)
+  edit(fname, lname, employeeId, userId)
   {
     this.addUserForm.get("firstName").setValue(fname);
     this.addUserForm.get("lastName").setValue(lname);
     this.addUserForm.get("employeeId").setValue(employeeId);
+    this.addUserForm.get("userId").setValue(userId);
     this.add=false;
     this.update=true;
+  }
+
+  updateUser()
+  {
+    this.updateUserVo.firstName = this.addUserForm.get("firstName").value;
+    this.updateUserVo.lastName = this.addUserForm.get("lastName").value;
+    this.updateUserVo.employeeId = this.addUserForm.get("employeeId").value;
+    this.updateUserVo._id = this.addUserForm.get("userId").value;
+    
+    console.log(this.updateUserVo);
+    this.service.updateUserInfo(this.updateUserVo);
+    window.location.reload();
   }
 }
