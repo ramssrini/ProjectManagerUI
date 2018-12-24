@@ -1,5 +1,7 @@
 <form [formGroup]="addProjectForm">
   <div id="addProjectSection"> 
+      <input type="hidden"  class="form-control" formControlName="projectId"/>
+      <input type="hidden"  class="form-control" formControlName="userId"/>
         <div *ngIf="validationError"  class="alert alert-danger">
           Please populate Project Name, Priority, StartDate and EndDate.          
         </div>
@@ -66,7 +68,7 @@
                 <div class="col col-auto"></div>
                 <div class="col col-1"></div>
                 <div class="col col-auto" >
-                  <button class="btn"  type="submit" id="button-addPoject" (click)="update()">Update</button>
+                  <button class="btn"  type="button" id="button-addPoject" (click)="updateProject()">Update</button>
                 </div>
                 <div class="col col-auto">            
                   <button class="btn" type="button" id="button-reset" (click)="reset()">Reset</button>
@@ -99,6 +101,9 @@
          </div>
          <br>
          <div *ngFor="let projectItem of projectList">
+            <input type="hidden"  class="form-control" formControlName="employeeId" value="projectItem.employeeId"/>
+            <input type="hidden"  class="form-control" formControlName="lastName" value="projectItem.lastName"/>
+            <input type="hidden"  class="form-control" formControlName="firstName" value="projectItem.firstName"/>
            <div  class="row" >
                <div class="col col-1"></div>
              <div class="col col-4">
@@ -127,7 +132,7 @@
                  </div>  
                </div>
                <div class="col">
-                   <button class="btn" type="button" id="button-update" (click)="edit(projectItem.project, projectItem.startDate, projectItem.endDate, projectItem.priority)">Update</button><br><br> <button class="btn" type="button" id="button-suspend" (click)="suspend(projectItem._id)">Suspend</button>
+                   <button class="btn" type="button" id="button-update" (click)="edit(projectItem.project, projectItem.startDate, projectItem.endDate, projectItem.priority, projectItem._id, projectItem.userid, projectItem.lastName, projectItem.firstName, projectItem.employeeId)">Update</button><br><br> <button class="btn" type="button" id="button-suspend" (click)="suspend(projectItem.project, projectItem.startDate, projectItem.endDate, projectItem.priority, projectItem._id, projectItem.userid, projectItem.lastName, projectItem.firstName, projectItem.employeeId)">Suspend</button>
  
                  </div>
                </div>
@@ -155,7 +160,7 @@
             </div>
             <div class="row" *ngFor="let userItem of userList | filterUserName : userNameSearchText">
                 <div class="col">
-                  <div class="card" (click)="populateUserName(userItem.lastName + ' ' + userItem.firstName)" data-dismiss="modal">
+                  <div class="card" (click)="populateUserName(userItem.lastName , userItem.firstName, userItem._id, userItem.employeeId)" data-dismiss="modal">
                     <div class="card-header" >
                       <h5 class="card-title">{{userItem.lastName+ ' ' + userItem.firstName}}</h5>
                     </div>

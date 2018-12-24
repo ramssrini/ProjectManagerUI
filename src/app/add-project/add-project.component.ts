@@ -51,7 +51,12 @@ export class AddProjectComponent implements OnInit {
       endDate: new FormControl(),
       priority:new FormControl(0),
       managerName:new FormControl(),
-      projectSearchName:new FormControl()
+      employeeId:new FormControl(),
+      lastName:new FormControl(),
+      firstName:new FormControl(),
+      userId:new FormControl(),
+      projectSearchName:new FormControl(),
+      projectId:new FormControl()
     });
   }
 
@@ -67,10 +72,14 @@ export class AddProjectComponent implements OnInit {
     }
     else{
       this.validationError = false;
-       this.newProject.project = this.addProjectForm.get("projectName").value;
+      this.newProject.project = this.addProjectForm.get("projectName").value;
       this.newProject.startDate = this.addProjectForm.get("startDate").value;
       this.newProject.endDate = this.addProjectForm.get("endDate").value;
       this.newProject.priority = this.addProjectForm.get("priority").value;
+      this.newProject.userid = this.addProjectForm.get("userId").value;
+      this.newProject.employeeId = this.addProjectForm.get("employeeId").value;
+      this.newProject.lastName = this.addProjectForm.get("lastName").value;
+      this.newProject.firstName = this.addProjectForm.get("firstName").value;
       console.log(this.newProject);
       this.service.addProjectInfo(this.newProject);
       window.location.reload();
@@ -131,8 +140,12 @@ export class AddProjectComponent implements OnInit {
     }
     this.projectList = this.tempProjects;
   }
-  populateUserName(selectedUserName){
-    this.addProjectForm.get("managerName").setValue(selectedUserName);
+  populateUserName(lastName, firstName , userId, employeeId){
+    this.addProjectForm.get("managerName").setValue(lastName + " " + firstName);
+    this.addProjectForm.get("employeeId").setValue(employeeId);
+    this.addProjectForm.get("lastName").setValue(lastName);
+    this.addProjectForm.get("firstName").setValue(firstName);
+    this.addProjectForm.get("userId").setValue(userId);
 
   }
 
@@ -164,20 +177,60 @@ export class AddProjectComponent implements OnInit {
     this.update=false;
   }
 
-  suspend(projectid)
+  suspend(projectName, startDate, endDate, priority, projectId, userId, lastName, firstName, employeeId)
   {
-    this.service.deleteProject(projectid);
+    this.newProject.project = projectName;
+      this.newProject._id = projectId;
+      this.newProject.startDate = startDate;
+      this.newProject.endDate = endDate;
+      this.newProject.priority = priority;
+      this.newProject.userid = userId;
+      this.newProject.employeeId = employeeId;
+      this.newProject.lastName = lastName;
+      this.newProject.firstName = firstName;
+    this.service.deleteProject(this.newProject);
     window.location.reload();
   }
 
-  edit(projectName, startDate, endDate, priority)
+  edit(projectName, startDate, endDate, priority, projectId, userId, lastName, firstName, employeeId)
   {
     
     this.addProjectForm.get("startDate").setValue(startDate);
     this.addProjectForm.get("endDate").setValue(endDate);
     this.addProjectForm.get("projectName").setValue(projectName);
     this.addProjectForm.get("priority").setValue(priority);
+    this.addProjectForm.get("projectId").setValue(projectId);
+    this.addProjectForm.get("userId").setValue(userId);
+    this.populateUserName(lastName, firstName, userId, employeeId);
+    console.log(this.addProjectForm);
     this.add=false;
     this.update=true;
+  }
+
+  updateProject()
+  {
+
+    if(this.addProjectForm.get("projectName").status == "INVALID"
+      || this.addProjectForm.get("startDate").status == "INVALID"
+      || this.addProjectForm.get("endDate").status == "INVALID"
+      || this.addProjectForm.get("priority").status == "INVALID")
+    {
+      this.validationError = true;
+    }
+    else{
+      this.validationError = false;
+      this.newProject.project = this.addProjectForm.get("projectName").value;
+      this.newProject._id = this.addProjectForm.get("projectId").value;
+      this.newProject.startDate = this.addProjectForm.get("startDate").value;
+      this.newProject.endDate = this.addProjectForm.get("endDate").value;
+      this.newProject.priority = this.addProjectForm.get("priority").value;
+      this.newProject.userid = this.addProjectForm.get("userId").value;
+      this.newProject.employeeId = this.addProjectForm.get("employeeId").value;
+      this.newProject.lastName = this.addProjectForm.get("lastName").value;
+      this.newProject.firstName = this.addProjectForm.get("firstName").value;
+      this.service.updateProjectInfo(this.newProject);
+      window.location.reload();
+    }
+
   }
 }

@@ -25,10 +25,18 @@ getProjectById(id): Observable<any>{
 
 
 
-deleteProject(id): Promise<any>{
-  return this.http.delete(this.baseUrl+"deleteProject?id="+id)
-   .toPromise()
-   .then(res=>res.json());
+deleteProject( project : ProjectVO): Promise<any>{
+
+  let body = JSON.stringify( project );            
+  let headers = new Headers({ 'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'});
+  let options = new RequestOptions({ headers : headers});
+
+return this.http.post( this.baseUrl+"deleteProject", body, options )
+.toPromise()
+.then(res=>res.json()) ; 
 }
 
  addProjectInfo(
