@@ -51,6 +51,11 @@ export class AddtaskComponent implements OnInit {
       startDate: new FormControl(),
       endDate: new FormControl(),
       userName: new FormControl(),
+      userLastName: new FormControl(),
+      userFirstName: new FormControl(),
+      userEmployeeId: new FormControl(),
+      userprojectId: new FormControl(),
+      userTaskId: new FormControl(),
       userId: new FormControl(),
       projectId: new FormControl(),
       parentCheckBox : new FormControl()
@@ -81,6 +86,11 @@ export class AddtaskComponent implements OnInit {
       this.newTask.startDate = this.addTaskForm.get("startDate").value;
       this.newTask.endDate = this.addTaskForm.get("endDate").value;
       this.newTask.userId = this.addTaskForm.get("userId").value;
+      this.newTask.userEmployeeId = this.addTaskForm.get("userEmployeeId").value;
+      this.newTask.userFirstName = this.addTaskForm.get("userFirstName").value;
+      this.newTask.userLastName = this.addTaskForm.get("userLastName").value;
+      this.newTask.userTaskId = this.addTaskForm.get("userTaskId").value;
+      this.newTask.userprojectId = this.addTaskForm.get("userprojectId").value;
       this.newTask.projectId = this.addTaskForm.get("projectId").value;
       console.log(this.newTask);
       this.service.addTaskInfo(this.newTask);
@@ -98,9 +108,16 @@ export class AddtaskComponent implements OnInit {
     this.addTaskForm.get("parentTaskId").setValue(selectedParentTaskId);
 
   }
-  populateUserName(selectedUserName, selectedUserId){
-    this.addTaskForm.get("userName").setValue(selectedUserName);
-    this.addTaskForm.get("userId").setValue(selectedUserId);
+  populateUserName(lastName , firstName, _id, taskId, employeeId, projectId){
+    console.log(lastName + "   -  " + firstName + "   -  " + _id + "   -  " + taskId + "   -  " + employeeId + "   -  " +projectId );
+    this.addTaskForm.get("userName").setValue(lastName+ ' ' + firstName);
+    this.addTaskForm.get("userLastName").setValue(lastName);
+    this.addTaskForm.get("userFirstName").setValue(firstName);
+    this.addTaskForm.get("userId").setValue(_id);
+    this.addTaskForm.get("userTaskId").setValue(taskId);
+    this.addTaskForm.get("userEmployeeId").setValue(employeeId);
+    this.addTaskForm.get("userprojectId").setValue(projectId);
+    
 
   }
   reset()

@@ -3,4 +3,6 @@ export class UserVO {
     firstName : string;
     employeeId : string;
     _id : string;
+    taskId : string;
+    projectId : string;
 }

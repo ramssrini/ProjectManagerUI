@@ -102,6 +102,7 @@
          <br>
          <div *ngFor="let projectItem of projectList">
             <input type="hidden"  class="form-control" formControlName="employeeId" value="projectItem.employeeId"/>
+            <input type="hidden"  class="form-control" formControlName="taskId" value="projectItem.taskId"/>
             <input type="hidden"  class="form-control" formControlName="lastName" value="projectItem.lastName"/>
             <input type="hidden"  class="form-control" formControlName="firstName" value="projectItem.firstName"/>
            <div  class="row" >
@@ -132,7 +133,7 @@
                  </div>  
                </div>
                <div class="col">
-                   <button class="btn" type="button" id="button-update" (click)="edit(projectItem.project, projectItem.startDate, projectItem.endDate, projectItem.priority, projectItem._id, projectItem.userid, projectItem.lastName, projectItem.firstName, projectItem.employeeId)">Update</button><br><br> <button class="btn" type="button" id="button-suspend" (click)="suspend(projectItem.project, projectItem.startDate, projectItem.endDate, projectItem.priority, projectItem._id, projectItem.userid, projectItem.lastName, projectItem.firstName, projectItem.employeeId)">Suspend</button>
+                   <button class="btn" type="button" id="button-update" (click)="edit(projectItem.project, projectItem.startDate, projectItem.endDate, projectItem.priority, projectItem._id, projectItem.userid, projectItem.lastName, projectItem.firstName, projectItem.employeeId, projectItem.taskId)">Update</button><br><br> <button class="btn" type="button" id="button-suspend" (click)="suspend(projectItem.project, projectItem.startDate, projectItem.endDate, projectItem.priority, projectItem._id, projectItem.userid, projectItem.lastName, projectItem.firstName, projectItem.employeeId)">Suspend</button>
  
                  </div>
                </div>
@@ -160,7 +161,7 @@
             </div>
             <div class="row" *ngFor="let userItem of userList | filterUserName : userNameSearchText">
                 <div class="col">
-                  <div class="card" (click)="populateUserName(userItem.lastName , userItem.firstName, userItem._id, userItem.employeeId)" data-dismiss="modal">
+                  <div class="card" (click)="populateUserName(userItem.lastName , userItem.firstName, userItem._id, userItem.employeeId, userItem.taskId)" data-dismiss="modal">
                     <div class="card-header" >
                       <h5 class="card-title">{{userItem.lastName+ ' ' + userItem.firstName}}</h5>
                     </div>

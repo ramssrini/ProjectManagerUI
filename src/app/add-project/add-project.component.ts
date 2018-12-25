@@ -56,7 +56,8 @@ export class AddProjectComponent implements OnInit {
       firstName:new FormControl(),
       userId:new FormControl(),
       projectSearchName:new FormControl(),
-      projectId:new FormControl()
+      projectId:new FormControl(),
+      taskId:new FormControl()
     });
   }
 
@@ -80,6 +81,7 @@ export class AddProjectComponent implements OnInit {
       this.newProject.employeeId = this.addProjectForm.get("employeeId").value;
       this.newProject.lastName = this.addProjectForm.get("lastName").value;
       this.newProject.firstName = this.addProjectForm.get("firstName").value;
+      this.newProject.taskId = this.addProjectForm.get("taskId").value;
       console.log(this.newProject);
       this.service.addProjectInfo(this.newProject);
       window.location.reload();
@@ -140,12 +142,13 @@ export class AddProjectComponent implements OnInit {
     }
     this.projectList = this.tempProjects;
   }
-  populateUserName(lastName, firstName , userId, employeeId){
+  populateUserName(lastName, firstName , userId, employeeId, taskId){
     this.addProjectForm.get("managerName").setValue(lastName + " " + firstName);
     this.addProjectForm.get("employeeId").setValue(employeeId);
     this.addProjectForm.get("lastName").setValue(lastName);
     this.addProjectForm.get("firstName").setValue(firstName);
     this.addProjectForm.get("userId").setValue(userId);
+    this.addProjectForm.get("taskId").setValue(taskId);
 
   }
 
@@ -192,7 +195,7 @@ export class AddProjectComponent implements OnInit {
     window.location.reload();
   }
 
-  edit(projectName, startDate, endDate, priority, projectId, userId, lastName, firstName, employeeId)
+  edit(projectName, startDate, endDate, priority, projectId, userId, lastName, firstName, employeeId, taskId)
   {
     
     this.addProjectForm.get("startDate").setValue(startDate);
@@ -201,7 +204,7 @@ export class AddProjectComponent implements OnInit {
     this.addProjectForm.get("priority").setValue(priority);
     this.addProjectForm.get("projectId").setValue(projectId);
     this.addProjectForm.get("userId").setValue(userId);
-    this.populateUserName(lastName, firstName, userId, employeeId);
+    this.populateUserName(lastName, firstName, userId, employeeId, taskId);
     console.log(this.addProjectForm);
     this.add=false;
     this.update=true;
@@ -228,6 +231,7 @@ export class AddProjectComponent implements OnInit {
       this.newProject.employeeId = this.addProjectForm.get("employeeId").value;
       this.newProject.lastName = this.addProjectForm.get("lastName").value;
       this.newProject.firstName = this.addProjectForm.get("firstName").value;
+      this.newProject.taskId = this.addProjectForm.get("taskId").value;
       this.service.updateProjectInfo(this.newProject);
       window.location.reload();
     }

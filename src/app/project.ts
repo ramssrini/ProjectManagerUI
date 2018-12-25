@@ -7,5 +7,6 @@ export class ProjectVO {
     lastName : string;
     firstName : string;
     employeeId : string;
+    taskId : string;
     _id : string;
 }

@@ -9,5 +9,10 @@ export class TaskVO {
     endDate : string;
     priority : number;
     project : string;
-    status: string;
+    status: string; 
+    userLastName: string;
+    userFirstName: string;
+    userEmployeeId: string;
+    userprojectId: string;
+    userTaskId: string;
 }
