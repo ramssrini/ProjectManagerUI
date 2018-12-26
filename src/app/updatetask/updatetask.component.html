@@ -1,65 +1,207 @@
-<form [formGroup]="updateTaskForm" (ngSubmit)="onSubmit()" >
-
-<div id="updateSection">
+<form [formGroup]="updateTaskForm" (ngSubmit)="onSubmit()">
+  
+  <div id="addSection">
+    <div class="row justify-content-start">
+    <div class="col col-auto"></div>
+    <div class="col col-1">
+      <b>Project:</b>
+    </div>
+    <div class="col col-auto"><input type="text" size="64" class="form-control" formControlName="projectName" disabled required/>
+      
+    </div>
+    <div class="col col-2">
+    <button class="btn" type="button" data-toggle="modal" data-target="#projectSearchModal">Search</button>
+    </div>
+    
+  </div>
+  <br>
     <div class="row justify-content-start">
       <div class="col col-auto"></div>
-      <div class="col col-2">
-        Task:
+      <div class="col col-1">
+        <b>Task:</b>
       </div>
-      <div class="col col-5"><input type="text" class="form-control" id="taskName" formControlName="taskName">
+      <div class="col col-auto"><input type="text" size="78" class="form-control" formControlName="taskName"  required/>
       </div>
     </div>
     <br>
     <div class="row justify-content-start">
       <div class="col col-auto"></div>
-      <div class="col col-2">
-        <label for="formControlRange">Priority:</label>
+      <div class="col col-1"></div>&nbsp;&nbsp;
+      <div class="col col-auto">
+          <input type="checkbox"  class="form-check-input" id="parentCheckBox" formControlName="parentCheckBox" (click)="onclickParentCheckbox()">&nbsp;&nbsp;&nbsp;&nbsp;Parent Task
+      </div>
+      </div>
+      <br>
+    <div class="row justify-content-start">
+      <div class="col col-auto"></div>
+      <div class="col col-1">
+        <b><label for="formControlRange">Priority:</label></b>
       </div>
       <div class="col col-5">
-        <span class="input-group-text" id="basic-addon1">0<input type="range"  max="30" min="0" class="form-control-range" id="priority" step="1"  formControlName="priority">30</span>
+        <span class="input-group-text" id="basic-addon1">0<input  size="75" type="range" max="30" min="0" class="form-control-range" id="formControlRange" step="1" formControlName="priority" >30</span>
       </div>
     </div>
     <br>
     <div class="row justify-content-start">
       <div class="col col-auto"></div>
-      <div class="col col-2">
-        Parent Task:
+      <div class="col col-1">
+        <b>Parent Task:</b>
       </div>
-      <div class="col col-5">
-        <input type="text" class="form-control" id="parentTaskName"  formControlName="parentTaskName">
+      <div class="col col-auto">
+        <input type="text"  size="64" class="form-control" formControlName="parentTaskName"  disabled>
+        </div>
+        <div class="col col-2">
+          <button  class="btn" id="parentTaskSearchButton" type="button" data-toggle="modal" data-target="#parentTaskSearchModal">Search</button>
         </div>
     </div>
     <br>
     <div class="row justify-content-start">
         <div class="col col-auto"></div>
-        <div class="col col-2">
-          Start Date:
+        <div class="col col-1">
+          <b>Start Date:</b>
         </div>
-        <div class="col col-5">
-          <input type="date" class="form-control" id="startDate"  formControlName="startDate">
+        <div class="col col-2">
+          <input type="date" class="form-control" formControlName="startDate"  required>
+          </div> <div class="col col-1">
+            <b>End Date:</b>
           </div>
+          <div class="col col-2">
+            <input type="date" class="form-control" formControlName="endDate"  required>
+            </div>
       </div>
       <br>
       <div class="row justify-content-start">
-          <div class="col col-auto"></div>
-          <div class="col col-2">
-            End Date:
-          </div>
-          <div class="col col-5">
-            <input type="date" class="form-control" id="endDate"  formControlName="endDate">
-            </div>
+        <div class="col col-auto"></div>
+        <div class="col col-1">
+          <b>User:</b>
         </div>
-        <br>
+        <div class="col col-auto">
+            <input type="hidden" class="form-control" formControlName="userLastName" />
+            <input type="hidden" class="form-control" formControlName="userFirstName" />
+            <input type="hidden" class="form-control" formControlName="userEmployeeId" />
+            <input type="hidden" class="form-control" formControlName="userprojectId" />
+            <input type="hidden" class="form-control" formControlName="userTaskId" />
+          <input type="text"  size="64" class="form-control" formControlName="userName" disabled required/>
+          </div>
+          <div class="col col-2">
+            <button  class="btn" type="button" data-toggle="modal" data-target="#userSearchModal">Search</button>
+          </div>
+      </div>
         <br>
         <div class="row justify-content-start">
             <div class="col col-auto"></div>
-            <div class="col col-2"></div>
+            <div class="col col-1"></div>
             <div class="col col-auto">
-              <button class="btn btn-outline-secondary" type="button" id="button-addTask" (click)="onSubmit()">Update</button>
+              <button class="btn" type="submit" id="button-addTask">Update Task</button>
             </div>
             <div class="col col-auto">            
-              <button class="btn btn-outline-secondary" type="button" id="button-reset" (click)="cancel()">Cancel</button>
+              <button class="btn" type="button" id="button-reset" (click)="reset()">Reset</button>
             </div>
           </div>
   </div>
+  
+  
   </form>
+  <!-- Modal -->
+  <div class="modal fade" id="projectSearchModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col">
+                      <b>Project :</b> <input [(ngModel)]="projectSearchText">
+                  </div>
+              </div>
+              <div class="row" *ngFor="let projectItem of projectList | filterProject : projectSearchText">
+                  <div class="col">
+                    <div class="card" (click)="populateProjectName(projectItem.project, projectItem._id)" data-dismiss="modal">
+                      <div class="card-header" >
+                        <h5 class="card-title">{{projectItem.project}}</h5>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="modal fade" id="parentTaskSearchModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <b>Project :</b> <input [(ngModel)]="parentTaskSearchText">
+                    </div>
+                </div>
+                <div class="row" *ngFor="let taskItem of parentTaskList | filterParentTask : parentTaskSearchText">
+                    <div class="col">
+                      <div class="card" (click)="populateParentTask(taskItem.parentTask, taskItem._id)" data-dismiss="modal">
+                        <div class="card-header" >
+                          <h5 class="card-title">{{taskItem.parentTask}}</h5>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+  
+      <div class="modal fade" id="userSearchModal" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                
+              </div>
+              <div class="modal-body">
+                  <div class="row">
+                      <div class="col">
+                          <b>User Name :</b> <input [(ngModel)]="userNameSearchText">
+                      </div>
+                  </div>
+                  <div class="row" *ngFor="let userItem of userList | filterUserName : userNameSearchText">
+                      <div class="col">
+                        <div class="card" (click)="populateUserName(userItem.lastName , userItem.firstName, userItem._id, userItem.taskId, userItem.employeeId, userItem.projectId)" data-dismiss="modal">
+                          <div class="card-header" >
+                            <h5 class="card-title">{{userItem.lastName+ ' ' + userItem.firstName}}</h5>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+  

@@ -1,6 +1,7 @@
-<div class="row">
+<form [formGroup]="viewTaskForm" >
+  <div class="row">
   <div class="col">
-    <b>Project:&nbsp;&nbsp; </b> <input #projectSearchText size="40"/>&nbsp;&nbsp; <button class="btn" type="button-rounded" id="button-searchProject" (click)="search(projectSearchText.value)">Search</button>
+    <b>Project:&nbsp;&nbsp; </b> <input #projectSearchText size="40" class="form-control" formControlName="projectSearchText" />&nbsp;&nbsp; <button class="btn" type="button-rounded" id="button-searchProject" (click)="search(projectSearchText.value)">Search</button>
   </div>
   <div class="col">
       <button class="btn" type="button" id="button-sortStartDate" (click)="sortByStartDate(projectSearchText.value)">Start Date</button>&nbsp;&nbsp;
@@ -53,3 +54,5 @@
     </div>
 
 
+
+  </form>

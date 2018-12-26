@@ -53,6 +53,21 @@ delete(id): Promise<any>{
     .then(res=>res.json()) ;  
   }
 
+  addParentTaskInfo(
+    task : TaskVO): Promise<any>{
+
+      let body = JSON.stringify( task );            
+        let headers = new Headers({ 'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'});
+        let options = new RequestOptions({ headers : headers});
+
+    return this.http.post( this.baseUrl+"addParentTask", body, options )
+    .toPromise()
+    .then(res=>res.json()) ;  
+  }
+
   updateTaskInfo(
     task : TaskVO): Promise<any>{
 

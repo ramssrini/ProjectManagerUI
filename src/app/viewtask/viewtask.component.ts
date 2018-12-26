@@ -5,6 +5,7 @@ import { TaskVO } from '../task';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-viewtask',
@@ -17,17 +18,27 @@ export class ViewtaskComponent implements OnInit {
   public tasksearchText : string;
   tempTasks : Array<TaskVO>;
   // private router: Router;
-  public taskList : Array<TaskVO>;
+  public taskList :Array<TaskVO> = [
+   
+  ];
   public resetTaskList :Array<TaskVO> = [
    
   ];
+  viewTaskForm : FormGroup;
   constructor(public service: TaskManagerService,  private route: ActivatedRoute, private router : Router){
+    this.viewTaskForm = new FormGroup({projectSearchText : new FormControl()
+    });
+    
+   
+  }
+
+  getTasks()
+  {
     this.service.getTasks().then(data => this.taskList = data);
     this.service.getTasks().then(data => this.resetTaskList = data);
   }
-
   ngOnInit() {
-    
+    this.getTasks();
   }
 
   sortByStartDate(projectSearch){
@@ -46,7 +57,6 @@ export class ViewtaskComponent implements OnInit {
   sortByPriority(projectSearch){
     
     this.search(projectSearch);
-    console.log(this.taskList);
     this.taskList.sort((n1,n2) => { return n1.priority - n2.priority});
   }
 
