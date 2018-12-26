@@ -18,11 +18,6 @@ getUsers(): Promise<any>{
    
 }
 
-getUserById(id): Observable<any>{
-  return this.http.get(this.baseUrl+"getUser?id="+id);
-   
-}
-
 
 
 delete(id): Promise<any>{
