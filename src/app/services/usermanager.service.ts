@@ -10,7 +10,7 @@ export class UserManagerService{
     {
 
     }
-baseUrl: string = 'http://localhost:8080/';
+baseUrl: string = 'http://localhost:8081/';
 getUsers(): Promise<any>{
   return this.http.get(this.baseUrl+"getUsers")
    .toPromise()

@@ -10,7 +10,7 @@ export class ProjectManagerService{
     {
 
     }
-baseUrl: string = 'http://localhost:8080/';
+baseUrl: string = 'http://localhost:8081/';
 getProjects(): Promise<any>{
   return this.http.get(this.baseUrl+"getProjects")
    .toPromise()

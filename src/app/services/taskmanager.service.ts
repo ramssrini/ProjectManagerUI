@@ -10,7 +10,7 @@ export class TaskManagerService{
     {
 
     }
-baseUrl: string = 'http://localhost:8080/';
+baseUrl: string = 'http://localhost:8081/';
 getTasks(): Promise<any>{
   return this.http.get(this.baseUrl+"getTasks")
    .toPromise()
