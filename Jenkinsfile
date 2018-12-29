@@ -32,7 +32,7 @@ node {
       }
 
       stage('Lint') {
-          sh 'ng lint'
+         
       }
         
       stage('Build') {
