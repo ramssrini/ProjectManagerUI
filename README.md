@@ -6,5 +6,5 @@ Clone the source code. Navigate to the application folder and build the applicat
 Command:  docker build --rm -f "Dockerfile" -t ramssrini/taskmanagerappcasestudyone:latest .
 
 Run the docker images 
-Command: docker run -p 4200:4200 ramssrini/taskmanagerappcasestudyone:latest 
+Command: docker run -p 4200:4200 ramssrini/projectmanagerappcasestudy:latest 
 
